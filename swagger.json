@@ -1,0 +1,189 @@
+{
+    "swagger" : "2.0",
+    "info":{  
+		"description":"Documentation of WonderQ endpoints",
+		"version":"1.0.0",
+		"title":"WonderQ",
+		"contact":{ }
+    },
+    "basePath": "/",
+    "produces" : [ "application/json" ],
+    "consumes" : [ "application/json" ],
+    "schemes" : [ "http" ],
+    "paths": {
+        "/queue/create": {
+          "post": {
+            "description": "Creates a queue",
+            "tags": [{"name":"Queue" }],
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Response object",
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "message": "Successfully created queue"
+                  }
+                }
+              }
+            }
+          },
+          "parameters": [
+            {
+              "name": "queue",
+              "in": "body",
+              "description": "the name of the queue",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "queueName"
+              }
+            }
+          ]
+        },
+        "/message/create": {
+            "post": {
+              "description": "Creates a message in a queue",
+              "tags": [{"name":"Message"}],
+              "produces": [
+                "application/json"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Response object",
+                  "schema": {
+                    "type": "object",
+                    "example": {
+                        "status": "success",
+                        "message": "Message created successfully",
+                        "data": {
+                            "id": "7i3JM",
+                            "message": "Hi there!",
+                            "processed": false,
+                            "queue": "datam",
+                            "state": "INITIAL"
+                        }
+                    }
+                  }
+                }
+              }
+            },
+            "parameters": [
+              {
+                "name": "queue",
+                "in": "body",
+                "description": "the name of the queue",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": "queueName"
+                }
+              },
+              {
+                "name": "message",
+                "in": "body",
+                "description": "the message for the queue",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": "Hi there!"
+                }
+              }
+            ]
+          },
+          "/queue/messages": {
+            "get": {
+              "description": "Get messages to consume from a queue",
+              "tags": [{"name":"Queue" }],
+              "produces": [
+                "application/json"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Response object",
+                  "schema": {
+                    "type": "object",
+                    "example": {
+                        "status": "success",
+                        "message": "successfully retrieved messages",
+                        "data": [
+                            {
+                                "id": "dDSHf",
+                                "message": "Hi there!",
+                                "processed": false,
+                                "queue": "data",
+                                "state": "CONSUMING"
+                            },
+                            {
+                                "id": "fVh7J",
+                                "message": "Hi there!",
+                                "processed": false,
+                                "queue": "data",
+                                "state": "CONSUMING"
+                            },
+                            {
+                                "id": "T4Vto",
+                                "message": "Hi there!",
+                                "processed": false,
+                                "queue": "data",
+                                "state": "CONSUMING"
+                            }
+                        ]
+                    }
+                  }
+                }
+              }
+            },
+            "parameters": [
+              {
+                "name": "queue",
+                "in": "query",
+                "description": "the name of the queue",
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "example": "queueName"
+                }
+              }
+            ]
+          },
+          "/message": {
+            "post": {
+              "description": "Notifies server of message consumption",
+              "tags": [{"name":"Message"}],
+              "produces": [
+                "application/json"
+              ],
+              "responses": {
+                "200": {
+                  "description": "Response object",
+                  "schema": {
+                    "type": "object",
+                    "example": {
+                        "status": "success"
+                    }
+                  }
+                }
+              }
+            },
+            "parameters": [
+              {
+                "name": "message",
+                "in": "body",
+                "description": "the message for the queue",
+                "required": true,
+                "schema": {
+                  "type": "object",
+                  "example": {
+                      "queue": "queueName",
+                      "id": "7i3JM(messageId)"
+                  }
+                }
+              }
+            ]
+          }
+      }
+  }
