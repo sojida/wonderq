@@ -1,0 +1,17 @@
+extends layout
+
+block layout-content
+  div.View
+    h1.Banner WonderQ
+    div.Info
+      h5 This tool shows the stats for WonderQ
+    div.Header
+      h4.queueHeader Queue
+      h4 Message
+    each val in stats
+      div.Content
+        p.queueName #{val.queue}
+        p #{val.count}
+    else
+      p.noQueue There are no queues
+      

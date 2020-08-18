@@ -1,0 +1,32 @@
+body {
+    background: #fff;
+}
+
+.Banner {
+    border-bottom: 1px solid black;
+}
+
+.Header {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    margin: 5px;
+    padding: 0 10px;
+    border: 1px solid black;
+}
+
+.Content {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+    margin: 5px;
+    background: lightgray;
+    border-radius: 3px;
+}
+
+.queueName {
+    margin-left: 10px;
+}
+
+.noQueue {
+    text-align: center;
+    font-size: 16px;
+}
